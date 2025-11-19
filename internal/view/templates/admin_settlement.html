@@ -1,0 +1,35 @@
+{{ define "admin_settlement.html" }}
+{{ template "base.html" . }}
+{{ define "content" }}
+<div class="mb-4">
+    <p class="text-sm text-slate-500">Admin Panel</p>
+    <h2 class="text-2xl font-bold">Settlement Mitra</h2>
+</div>
+<div class="overflow-hidden rounded-xl border border-slate-200 bg-white">
+    <table class="w-full text-sm">
+        <thead class="bg-slate-50">
+            <tr class="text-left text-slate-500">
+                <th class="px-4 py-2">Mitra</th>
+                <th class="px-4 py-2">Periode</th>
+                <th class="px-4 py-2">Nominal</th>
+                <th class="px-4 py-2">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{ range .Settlements }}
+            <tr class="border-t border-slate-100">
+                <td class="px-4 py-2">{{ .MitraID }}</td>
+                <td class="px-4 py-2">{{ .PeriodFrom.Format "02 Jan" }} - {{ .PeriodTo.Format "02 Jan 2006" }}</td>
+                <td class="px-4 py-2">Rp {{ .Amount }}</td>
+                <td class="px-4 py-2"><span class="rounded-full bg-slate-100 px-2 py-1 text-xs">{{ .Status }}</span></td>
+            </tr>
+            {{ else }}
+            <tr>
+                <td colspan="4" class="px-4 py-4 text-slate-500">Belum ada settlement.</td>
+            </tr>
+            {{ end }}
+        </tbody>
+    </table>
+ </div>
+{{ end }}
+{{ end }}

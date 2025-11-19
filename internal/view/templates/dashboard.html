@@ -1,0 +1,86 @@
+{{ define "dashboard.html" }}
+{{ template "base.html" . }}
+{{ define "content" }}
+<div class="mb-6 flex items-center justify-between">
+    <div>
+        <p class="text-sm text-slate-500">Halo Driver, ini ringkasan akunmu</p>
+        <h2 class="text-2xl font-bold">Dashboard</h2>
+    </div>
+    <form action="/logout" method="post">
+        <button class="rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 hover:border-emerald-300 hover:text-emerald-700">Keluar</button>
+    </form>
+</div>
+
+<div class="grid gap-4 md:grid-cols-3">
+    <div class="rounded-xl bg-white p-4 shadow-sm">
+        <p class="text-sm text-slate-500">Total transaksi</p>
+        <p class="text-2xl font-bold">Rp {{ .Progress.TotalSpend }}</p>
+        <p class="text-xs text-slate-500">Menuju voucher berikutnya: Rp {{ .Progress.NextVoucher }}</p>
+    </div>
+    <div class="rounded-xl bg-white p-4 shadow-sm">
+        <p class="text-sm text-slate-500">Poin aktif</p>
+        <p class="text-2xl font-bold">{{ .Progress.Points }}</p>
+        <p class="text-xs text-slate-500">1 poin tiap Rp1.000 transaksi</p>
+    </div>
+    <div class="rounded-xl bg-emerald-600 p-4 text-white shadow-sm">
+        <p class="text-sm text-white/80">Voucher terakhir</p>
+        {{ if .Progress.RecentReward }}
+        <p class="text-xl font-semibold">{{ .Progress.RecentReward.Code }}</p>
+        <p class="text-sm text-white/80">Berlaku sampai {{ .Progress.RecentReward.ExpiresAt.Format "02 Jan 2006" }}</p>
+        {{ else }}
+        <p class="text-lg font-semibold">Belum ada voucher</p>
+        {{ end }}
+    </div>
+</div>
+
+<div class="mt-8 grid gap-6 lg:grid-cols-3">
+    <div class="lg:col-span-2 space-y-4">
+        <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold">Riwayat Order</h3>
+            <a class="text-sm text-emerald-700" href="/">Tambah order</a>
+        </div>
+        <div class="overflow-hidden rounded-xl border border-slate-200 bg-white">
+            <table class="w-full text-sm">
+                <thead class="bg-slate-50">
+                    <tr class="text-left text-slate-500">
+                        <th class="px-4 py-2">Produk</th>
+                        <th class="px-4 py-2">Channel</th>
+                        <th class="px-4 py-2">Nominal</th>
+                        <th class="px-4 py-2">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range .Orders }}
+                    <tr class="border-t border-slate-100">
+                        <td class="px-4 py-2">{{ .ProductID }}</td>
+                        <td class="px-4 py-2 uppercase">{{ .Channel }}</td>
+                        <td class="px-4 py-2">Rp {{ .Amount }}</td>
+                        <td class="px-4 py-2">
+                            <span class="rounded-full bg-slate-100 px-2 py-1 text-xs">{{ .Status }}</span>
+                        </td>
+                    </tr>
+                    {{ else }}
+                    <tr>
+                        <td class="px-4 py-4 text-slate-500" colspan="4">Belum ada transaksi.</td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="space-y-3">
+        <h3 class="text-lg font-semibold">Voucher Aktif</h3>
+        {{ range .Vouchers }}
+        <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+            <p class="text-sm text-slate-500">Kode</p>
+            <p class="text-lg font-semibold">{{ .Code }}</p>
+            <p class="text-sm text-slate-500">Nilai: Rp {{ .Value }}</p>
+            <img src="{{ .QRDataURI }}" alt="{{ .Code }}" class="mt-3 h-36 w-36 rounded-lg border border-slate-200">
+        </div>
+        {{ else }}
+        <p class="text-slate-500 text-sm">Belum ada voucher. Transaksi terus untuk unlock reward!</p>
+        {{ end }}
+    </div>
+</div>
+{{ end }}
+{{ end }}

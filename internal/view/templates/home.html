@@ -1,0 +1,48 @@
+{{ define "home.html" }}
+{{ template "base.html" . }}
+{{ define "content" }}
+<div class="mb-10 grid gap-6 lg:grid-cols-2">
+    <div class="rounded-2xl bg-white p-6 shadow-sm">
+        <p class="text-sm font-semibold text-emerald-600">Untuk Driver Ojol</p>
+        <h1 class="mt-2 text-3xl font-bold">Topup Gojek, Grab, Maxim, Pulsa &amp; Paket Internet</h1>
+        <p class="mt-3 text-slate-600">Setiap transaksi menambah poin dan akumulasi yang bisa ditukar jadi voucher servis di bengkel mitra. Bayar via QRIS, VA, atau e-wallet favoritmu.</p>
+        <div class="mt-4 flex flex-wrap gap-3">
+            <span class="badge">QRIS</span>
+            <span class="badge">Virtual Account</span>
+            <span class="badge">Dana</span>
+            <span class="badge">ShopeePay</span>
+            <span class="badge">OVO</span>
+        </div>
+        <div class="mt-6 flex gap-3">
+            <a href="/register" class="rounded-lg bg-emerald-600 px-4 py-2 text-white shadow hover:bg-emerald-700">Daftar Driver</a>
+            <a href="/dashboard" class="rounded-lg border border-slate-200 px-4 py-2 text-slate-700 hover:border-emerald-300 hover:text-emerald-700">Lihat Dashboard</a>
+        </div>
+    </div>
+    <div class="rounded-2xl bg-gradient-to-br from-emerald-600 to-emerald-400 p-6 text-white shadow">
+        <p class="text-sm uppercase tracking-wide">Reward Bengkel Mitra</p>
+        <h2 class="mt-2 text-2xl font-bold">Tukar poin jadi voucher servis</h2>
+        <ul class="mt-4 space-y-2 text-sm">
+            <li>• QR Code voucher untuk ditunjukkan ke kasir bengkel.</li>
+            <li>• Mitra scan QR, sistem validasi otomatis.</li>
+            <li>• Settlement transparan &amp; real-time.</li>
+        </ul>
+        <div class="mt-4 flex gap-2">
+            <div class="rounded-lg bg-white/15 px-3 py-2 text-xs">
+                <p class="text-white/70">Progress Reward</p>
+                <p class="text-lg font-bold">Jalan 75%</p>
+            </div>
+            <div class="rounded-lg bg-white/15 px-3 py-2 text-xs">
+                <p class="text-white/70">Voucher Aktif</p>
+                <p class="text-lg font-bold">02</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="flex items-center justify-between">
+    <h3 class="text-xl font-semibold">Produk Populer</h3>
+    <button class="text-sm text-emerald-700" hx-get="/partials/products" hx-target="#product-grid" hx-swap="innerHTML">Refresh</button>
+</div>
+<div id="product-grid" hx-get="/partials/products" hx-trigger="load" class="mt-4"></div>
+{{ end }}
+{{ end }}
