@@ -1,0 +1,65 @@
+{{ define "layout" }}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ .title }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    body {
+      background: radial-gradient(circle at 10% 20%, #0ea5e9 0, transparent 25%),
+                 radial-gradient(circle at 90% 10%, #7c3aed 0, transparent 20%),
+                 radial-gradient(circle at 30% 70%, #22c55e 0, transparent 22%),
+                 #0b1021;
+      color: #e2e8f0;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+  <header class="backdrop-blur-md sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-semibold text-white tracking-tight">Gaspoll</a>
+      <nav class="flex items-center space-x-4 text-sm text-slate-200">
+        <a href="/products" class="hover:text-white">Produk</a>
+        <a href="/mitra/redeem" class="hover:text-white">Redeem Mitra</a>
+        <a href="/admin/settlement" class="hover:text-white">Settlement</a>
+        {{ if .user }}
+          <a href="/dashboard" class="bg-white/10 border border-white/20 rounded-full px-3 py-1">Dashboard</a>
+        {{ else }}
+          <a href="/login" class="bg-emerald-500 text-slate-900 font-semibold rounded-full px-3 py-1">Masuk</a>
+        {{ end }}
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-6xl mx-auto px-4 py-8 space-y-10">
+    {{ block "content" . }}{{ end }}
+  </main>
+  <footer class="mt-10 border-t border-white/10 bg-black/30">
+    <div class="max-w-6xl mx-auto px-4 py-6 text-sm text-slate-200 grid md:grid-cols-3 gap-4">
+      <div>
+        <p class="text-white font-semibold">Gaspoll</p>
+        <p class="text-slate-300">E-commerce driver dengan reward servis bengkel mitra. Topup, pulsa, paket data, voucher QR.</p>
+      </div>
+      <div>
+        <p class="text-white font-semibold">Kontak</p>
+        <p>support@gaspoll.id</p>
+        <p>+62 812-3456-7890</p>
+      </div>
+      <div>
+        <p class="text-white font-semibold">Alamat</p>
+        <p>Jl. Startup No. 123, Jakarta</p>
+        <p class="text-slate-400">Operasional 09.00 - 18.00</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+{{ end }}

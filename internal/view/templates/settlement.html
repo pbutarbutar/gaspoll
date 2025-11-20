@@ -1,0 +1,38 @@
+{{ define "content" }}
+<div class="glass rounded-2xl p-4">
+  <div class="flex items-center justify-between mb-2">
+    <h1 class="text-2xl text-white font-semibold">Settlement Admin</h1>
+    <span class="text-xs px-3 py-1 rounded-full bg-white/10 text-slate-200">Simulasi</span>
+  </div>
+  {{ if .settlements }}
+    <table class="w-full text-sm text-slate-200">
+      <thead>
+        <tr class="text-left text-slate-300">
+          <th class="py-2">Periode</th>
+          <th class="py-2">Mitra</th>
+          <th class="py-2">Total Voucher</th>
+          <th class="py-2">Amount</th>
+          <th class="py-2">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ range .settlements }}
+        <tr class="border-t border-white/10">
+          <td class="py-2">{{ .Period }}</td>
+          <td class="py-2">{{ .MitraID }}</td>
+          <td class="py-2">{{ .TotalVoucher }}</td>
+          <td class="py-2">{{ currency .Amount }}</td>
+          <td class="py-2">{{ .Status }}</td>
+        </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  {{ else }}
+    <p class="text-slate-200 text-sm">Belum ada settlement. Voucher redeem akan muncul di sini untuk diakui dan dibayar ke mitra.</p>
+  {{ end }}
+</div>
+{{ end }}
+
+{{ define "settlement.html" }}
+{{ template "layout" . }}
+{{ end }}

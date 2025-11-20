@@ -1,0 +1,40 @@
+{{ define "content" }}
+<div class="flex items-center justify-between mb-4">
+  <div>
+    <h1 class="text-2xl font-semibold text-white">Produk Digital</h1>
+    <p class="text-slate-300">Topup driver, pulsa, paket internet. Klik beli untuk checkout instan.</p>
+  </div>
+  <a href="/dashboard" class="text-sm underline text-emerald-300">Dashboard</a>
+</div>
+<div class="grid md:grid-cols-3 gap-4">
+  {{ range .products }}
+  <div class="glass rounded-2xl p-4 border border-white/10">
+    <p class="text-xs text-slate-300 uppercase tracking-wide">{{ .Category }} • {{ .Provider }}</p>
+    <p class="text-lg text-white font-semibold">{{ .Name }}</p>
+    <p class="text-sm text-slate-200 mb-2">{{ .Description }}</p>
+    <p class="text-xl text-emerald-300 font-bold">{{ currency .Price }}</p>
+    <form
+      hx-post="/orders"
+      hx-target="#order-response"
+      hx-swap="innerHTML"
+      method="post"
+      class="mt-3 space-y-2">
+      <input type="hidden" name="product_id" value="{{ .ID }}">
+      <label class="text-xs text-slate-300 block">Metode bayar</label>
+      <select name="payment_method" class="w-full bg-white/10 text-white rounded-lg px-2 py-2 border border-white/10">
+        <option value="QRIS">QRIS</option>
+        <option value="VA">Virtual Account</option>
+        <option value="E-Wallet">E-Wallet</option>
+      </select>
+      <button type="submit" class="w-full bg-emerald-500 text-slate-900 font-semibold rounded-lg py-2">Beli sekarang</button>
+    </form>
+  </div>
+  {{ end }}
+
+</div>
+<div id="order-response" class="mt-6"></div>
+{{ end }}
+
+{{ define "products.html" }}
+{{ template "layout" . }}
+{{ end }}

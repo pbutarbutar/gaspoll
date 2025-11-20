@@ -1,0 +1,4 @@
+nohup: ignoring input
+2025/11/20 15:29:45 Gaspoll server listening on :18200
+⇨ http server started on [::]:18200
+{"time":"2025-11-20T15:43:53.688572853+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:18200","method":"GET","uri":"/mitra/m-jaya","user_agent":"curl/7.81.0","status":200,"error":"","latency":3267040,"latency_human":"3.26704ms","bytes_in":0,"bytes_out":8775}

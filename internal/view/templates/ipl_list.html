@@ -1,0 +1,43 @@
+
+{{ define "ipl_list.html" }}
+{{ template "layout" . }}
+{{ end }}
+
+{{ define "content" }}
+<div class="max-w-3xl mx-auto glass rounded-2xl p-6">
+  <div class="flex items-center justify-between mb-4">
+    <div>
+      <h1 class="text-2xl font-semibold text-white">Tagihan IPL - {{ .Perumahan }}</h1>
+      <p class="text-sm text-slate-300">Nomor Rumah: {{ .Nomor }}</p>
+    </div>
+    <a href="/" class="text-sm underline text-slate-200">Kembali</a>
+  </div>
+
+  {{ if .Bills }}
+  <div class="space-y-3">
+    {{ range .Bills }}
+    <div class="glass p-4 rounded-lg flex items-center justify-between">
+      <div>
+        <p class="text-sm text-slate-300">Periode</p>
+        <p class="text-white font-semibold">{{ .Period }}</p>
+        <p class="text-xs text-slate-300">No. Rumah: {{ .House }}</p>
+      </div>
+      <div class="text-right">
+        <p class="text-sm text-slate-300">Jumlah Tagihan</p>
+        <p class="text-emerald-400 font-semibold">{{ currency .Amount }}</p>
+        <form action="/ipl/pay" method="post" class="mt-2">
+          <input type="hidden" name="perumahan" value="{{ $.Perumahan }}">
+          <input type="hidden" name="nomor" value="{{ $.Nomor }}">
+          <input type="hidden" name="period" value="{{ .Period }}">
+          <button class="bg-emerald-500 text-slate-900 font-semibold rounded-lg px-3 py-1">Bayar Sekarang</button>
+        </form>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+  {{ else }}
+  <p class="text-sm text-slate-300">Tidak ada tagihan IPL belum terbayar untuk nomor ini.</p>
+  {{ end }}
+
+</div>
+{{ end }}

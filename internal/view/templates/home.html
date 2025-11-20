@@ -1,0 +1,175 @@
+{{ define "content" }}
+<section class="grid md:grid-cols-2 gap-6 items-start">
+  <div class="glass rounded-2xl p-5 border border-white/10 shadow-2xl">
+    <p class="uppercase text-xs tracking-[0.3em] text-slate-300 mb-3">Produk utama</p>
+    <div class="grid md:grid-cols-2 gap-3">
+      {{ range $i, $cat := (slice "Topup Driver" "Pulsa" "Paket Internet" "Voucher Servis") }}
+      <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+        <p class="text-xs text-slate-300 uppercase tracking-wide">{{ $cat }}</p>
+        <p class="text-lg text-white font-semibold">{{ if eq $cat "Topup Driver" }}Topup Gojek/Grab/Maxim/InDrive{{ else if eq $cat "Pulsa" }}Pulsa semua operator{{ else if eq $cat "Paket Internet" }}Kuota harian & bulanan{{ else }}Voucher servis bengkel{{ end }}</p>
+        <p class="text-sm text-slate-200">Bayar QRIS/VA/E-Wallet, konfirmasi via WA.</p>
+        <a href="/products" class="inline-block mt-3 px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm">Beli {{ $cat }}</a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+
+  <div class="space-y-4">
+    <p class="uppercase text-xs tracking-[0.4em] text-slate-300">E-commerce driver + reward bengkel</p>
+    <h1 class="text-4xl md:text-5xl font-semibold text-white leading-tight">Topup driver, pulsa, paket data dengan <span class="text-emerald-400">hadiah voucher servis</span>.</h1>
+    <p class="text-slate-200 max-w-xl">Transaksi tanpa dompet digital khusus. Bayar pakai QRIS/VA/E-Wallet lalu konfirmasi via WhatsApp. Poin otomatis jadi voucher servis yang bisa ditukar di bengkel mitra.</p>
+    <div class="flex space-x-3">
+      <a href="/login" class="px-4 py-2 rounded-full bg-emerald-500 text-slate-900 font-semibold">Masuk / Daftar Driver</a>
+      <a href="/products" class="px-4 py-2 rounded-full border border-white/30 text-white">Lihat Produk</a>
+    </div>
+    <div class="grid grid-cols-3 gap-3 text-sm text-slate-100">
+      <div class="glass rounded-xl p-3">
+        <div class="text-xl font-semibold">3 menit</div>
+        <div class="text-slate-300">Checkout cepat htmx</div>
+      </div>
+      <div class="glass rounded-xl p-3">
+        <div class="text-xl font-semibold">Voucher QR</div>
+        <div class="text-slate-300">Redeem di bengkel mitra</div>
+      </div>
+      <div class="glass rounded-xl p-3">
+        <div class="text-xl font-semibold">GRPC ready</div>
+        <div class="text-slate-300">Backend layer siap di swap</div>
+      </div>
+    </div>
+  </div>
+  <div class="glass rounded-2xl p-5 space-y-4">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-2xl font-bold text-white">Produk Lainnya</p>
+      </div>
+      <span class="px-3 py-1 rounded-full bg-white/10 text-emerald-300 text-xs">Reward aktif</span>
+    </div>
+    <div class="grid grid-cols-2 gap-3 text-sm">
+      {{ range $i, $p := .products }}
+        {{ if lt $i 4 }}
+      <div class="glass rounded-xl p-3 border border-white/10">
+        <p class="text-slate-300">{{ $p.Category }}</p>
+        <p class="text-white font-semibold">{{ $p.Name }}</p>
+        <p class="text-emerald-300">{{ currency $p.Price }}</p>
+        <a href="/products" class="text-xs text-white underline">Beli</a>
+        </div>
+        {{ end }}
+      {{ end }}
+    </div>
+    <div class="text-xs text-slate-300">Pembayaran: QRIS, VA, Dana, ShopeePay, OVO</div>
+  </div>
+  
+  <!-- IPL Perumahan small card -->
+  <div class="glass rounded-2xl p-5 space-y-4">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-xs text-slate-300">Bayar IPL Perumahan</p>
+        <p class="text-sm text-slate-200">Bayar iuran lingkungan perumahan langsung.</p>
+      </div>
+    </div>
+    <form action="/ipl" method="get" class="space-y-3">
+      <div>
+        <label class="text-xs text-slate-300">Pilih Perumahan</label>
+        <select name="perumahan" class="w-full mt-1 rounded-lg bg-white/5 p-2 text-white">
+          <option value="Puri Arasana">Perumah Puri Arasana</option>
+          <option value="BSD">Perumah BSD</option>
+        </select>
+      </div>
+      <div>
+        <label class="text-xs text-slate-300">Nomor Rumah</label>
+        <input name="nomor" type="text" placeholder="Contoh: A-12" class="w-full mt-1 rounded-lg bg-white/5 p-2 text-white" />
+      </div>
+      <div>
+        <button class="w-full bg-emerald-500 text-slate-900 font-semibold rounded-lg py-2">Bayar</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="mt-10 glass rounded-2xl p-5 border border-white/10">
+  <div class="flex items-center justify-between mb-4">
+    <div>
+      <p class="text-xs text-slate-300">Pilihan cepat</p>
+      <h2 class="text-xl font-semibold text-white">Topup Driver Favorit</h2>
+    </div>
+    <a href="/products" class="text-sm text-emerald-300 underline">Lihat semua produk</a>
+  </div>
+  <div class="grid md:grid-cols-4 gap-4">
+    {{ range .topupCards }}
+    {{ $p := .product }}
+    <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+      <p class="text-xs text-slate-300 uppercase tracking-wide">{{ .label }}</p>
+      {{ if $p }}
+        <p class="text-lg text-white font-semibold">{{ $p.Name }}</p>
+        <p class="text-sm text-slate-200 mb-2">{{ $p.Description }}</p>
+        <p class="text-xl text-emerald-300 font-bold">{{ currency $p.Price }}</p>
+        <form action="/products" method="get" class="mt-3">
+          <button class="w-full bg-emerald-500 text-slate-900 font-semibold rounded-lg py-2">Beli sekarang</button>
+        </form>
+      {{ else }}
+        <p class="text-sm text-slate-200">Segera hadir.</p>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+<section class="mt-10">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-xl font-semibold text-white">Bengkel mitra siap melayani</h2>
+    <a href="/mitra/redeem" class="text-sm underline text-slate-200">Lihat detail</a>
+  </div>
+<div class="grid md:grid-cols-3 gap-4">
+  {{ range $i, $m := .mitras }}
+  {{ if lt $i 9 }}
+  <div class="glass rounded-2xl p-4">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-lg font-semibold text-white">{{ $m.Name }}</p>
+        <p class="text-slate-300 text-sm">{{ $m.Address }}</p>
+      </div>
+      <span class="text-xs px-2 py-1 rounded-full bg-white/10 text-emerald-300">{{ $m.Distance }}</span>
+    </div>
+    <p class="mt-2 text-sm text-slate-200">{{ $m.Promo }}</p>
+    <div class="mt-3 flex flex-wrap gap-2 text-xs text-slate-200">
+      {{ range $m.Services }}<span class="bg-white/10 rounded-full px-2 py-1">{{ . }}</span>{{ end }}
+    </div>
+    <div class="mt-3">
+      <a href="/mitra/{{ $m.ID }}" class="inline-block mt-2 px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm">Lihat Promo</a>
+    </div>
+  </div>
+  {{ end }}
+  {{ end }}
+</div>
+</section>
+
+<section class="mt-10">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-xl font-semibold text-white">Bengkel mitra siap melayani</h2>
+    <a href="/mitra/redeem" class="text-sm underline text-slate-200">Lihat detail</a>
+  </div>
+<div class="grid md:grid-cols-3 gap-4">
+  {{ range $i, $m := .mitras }}
+  {{ if lt $i 9 }}
+  <div class="glass rounded-2xl p-4">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-lg font-semibold text-white">{{ $m.Name }}</p>
+        <p class="text-slate-300 text-sm">{{ $m.Address }}</p>
+      </div>
+      <span class="text-xs px-2 py-1 rounded-full bg-white/10 text-emerald-300">{{ $m.Distance }}</span>
+    </div>
+    <p class="mt-2 text-sm text-slate-200">{{ $m.Promo }}</p>
+    <div class="mt-3 flex flex-wrap gap-2 text-xs text-slate-200">
+      {{ range $m.Services }}<span class="bg-white/10 rounded-full px-2 py-1">{{ . }}</span>{{ end }}
+    </div>
+  </div>
+  {{ end }}
+  {{ end }}
+</div>
+</section>
+{{ end }}
+
+{{ define "home.html" }}
+{{ template "layout" . }}
+{{ end }}

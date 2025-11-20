@@ -1,0 +1,28 @@
+{{ define "order_result" }}
+<div class="glass rounded-2xl p-4">
+  <p class="text-sm text-slate-300">Order ID</p>
+  <p class="text-xl text-white font-semibold">{{ .order.ID }} • {{ .order.ProductName }}</p>
+  <p class="text-emerald-300 text-lg font-bold">{{ currency .order.Amount }}</p>
+  <div class="mt-3">
+    <p class="text-sm text-slate-300">Metode</p>
+    <p class="text-slate-100 font-semibold">{{ .instruction.Method }}</p>
+    {{ if .instruction.Code }}<p class="text-sm text-slate-300">Kode bayar: {{ .instruction.Code }}</p>{{ end }}
+    {{ if .instruction.QRString }}<p class="text-sm text-slate-300">Scan QRIS di aplikasi Anda.</p>{{ end }}
+    <ul class="mt-2 text-sm text-slate-200 list-disc list-inside">
+      {{ range .instruction.Steps }}<li>{{ . }}</li>{{ end }}
+    </ul>
+  </div>
+  <div class="mt-4 flex space-x-2">
+    <a href="{{ .order.WhatsAppLink }}" target="_blank" class="bg-emerald-500 text-slate-900 px-4 py-2 rounded-lg font-semibold">Buka WhatsApp</a>
+    <a href="/dashboard" class="bg-white/10 text-white px-4 py-2 rounded-lg">Lihat dashboard</a>
+  </div>
+</div>
+{{ end }}
+
+{{ define "content" }}
+  {{ template "order_result" . }}
+{{ end }}
+
+{{ define "order_result_page.html" }}
+{{ template "layout" . }}
+{{ end }}

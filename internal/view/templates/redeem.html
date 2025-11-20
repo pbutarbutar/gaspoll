@@ -1,0 +1,25 @@
+{{ define "content" }}
+<div class="max-w-md mx-auto glass rounded-2xl p-6">
+  <h1 class="text-2xl font-semibold text-white mb-2">Redeem Voucher Mitra</h1>
+  {{ if .mitra }}
+    <p class="text-slate-200 text-sm mb-2">Mitra: <span class="text-white font-semibold">{{ .mitra.Name }}</span> — {{ .mitra.Address }}</p>
+  {{ else }}
+    <p class="text-slate-200 text-sm mb-4">Mitra bengkel: masukkan kode voucher atau scan QR dari driver untuk validasi.</p>
+  {{ end }}
+  <form action="/mitra/redeem" method="post" class="flex space-x-2">
+    {{ if .mitra }}<input type="hidden" name="mitra_id" value="{{ .mitra.ID }}">{{ end }}
+    <input name="voucher_id" class="flex-1 px-3 py-2 rounded-lg bg-white/10 text-white border border-white/10" placeholder="Contoh: v-7001">
+    <button class="bg-emerald-500 text-slate-900 font-semibold rounded-lg px-4 py-2">Redeem</button>
+  </form>
+
+  {{ if .success }}
+    <div class="mt-4 p-4 rounded-xl bg-emerald-500/20 border border-emerald-400 text-white">
+      Voucher {{ .voucher.Code }} berhasil diredeem!
+    </div>
+  {{ end }}
+</div>
+{{ end }}
+
+{{ define "redeem.html" }}
+{{ template "layout" . }}
+{{ end }}
