@@ -85,28 +85,6 @@
   <div class="glass rounded-2xl p-5 space-y-4">
     <div class="flex items-center justify-between">
       <div>
-        <p class="text-2xl font-bold text-white">Produk Lainnya</p>
-      </div>
-    </div>
-    <div class="grid grid-cols-2 gap-3 text-sm">
-      {{ range $i, $p := .products }}
-        {{ if lt $i 4 }}
-      <div class="glass rounded-xl p-3 border border-white/10">
-        <p class="text-slate-300">{{ $p.Category }}</p>
-        <p class="text-white font-semibold">{{ $p.Name }}</p>
-        <p class="text-emerald-300">{{ currency $p.Price }}</p>
-        <a href="/products" class="text-xs text-white underline">Beli</a>
-        </div>
-        {{ end }}
-      {{ end }}
-    </div>
-    <div class="text-xs text-slate-300">Pembayaran: QRIS, VA, Dana, ShopeePay, OVO</div>
-  </div>
-  
-  <!-- IPL Perumahan small card -->
-  <div class="glass rounded-2xl p-5 space-y-4">
-    <div class="flex items-center justify-between">
-      <div>
         <h2 class="text-2xl md:text-3xl font-semibold text-white leading-tight">Bayar IPL Perumahan</h2>
         <p class="text-sm text-slate-200">Bayar iuran lingkungan perumahan langsung.</p>
       </div>
@@ -133,11 +111,32 @@
       </div>
     </form>
   </div>
+
+  <div class="glass rounded-2xl p-5 space-y-4">
+    <div class="flex items-center justify-between">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-semibold text-white leading-tight">Produk Lainnya</h2>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 gap-3 text-sm">
+      {{ range $i, $p := .products }}
+        {{ if lt $i 4 }}
+      <div class="glass rounded-xl p-3 border border-white/10">
+        <p class="text-slate-300">{{ $p.Category }}</p>
+        <p class="text-white font-semibold">{{ $p.Name }}</p>
+        <p class="text-emerald-300">{{ currency $p.Price }}</p>
+        <a href="/products" class="text-xs text-white underline">Beli</a>
+        </div>
+        {{ end }}
+      {{ end }}
+    </div>
+    <div class="text-xs text-slate-300">Pembayaran: QRIS, VA, Dana, ShopeePay, OVO</div>
+  </div>
 </section>
 
 <section class="mt-10">
   <div class="flex items-center justify-between mb-4">
-    <h2 class="text-xl font-semibold text-white">Bengkel mitra siap melayani</h2>
+    <h2 class="text-2xl md:text-3xl font-semibold text-white leading-tight">Bengkel mitra siap melayani</h2>
     <a href="/mitra/redeem" class="text-sm underline text-slate-200">Lihat detail</a>
   </div>
 <div class="grid md:grid-cols-3 gap-4">
