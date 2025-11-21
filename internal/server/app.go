@@ -38,7 +38,20 @@ type App struct {
 
 func New(cfg config.Config, repo *repository.Repository) *App {
 	e := echo.New()
+	// Add middleware to set Cache-Control for static assets
+	e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			if strings.HasPrefix(c.Request().URL.Path, "/assets/") {
+				c.Response().Header().Set("Cache-Control", "public, max-age=31536000, immutable")
+			}
+			return next(c)
+		}
+	})
 	e.HideBanner = true
+
+	// serve static assets from web/assets at /assets/
+	e.Static("/assets", "web/assets")
+
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 

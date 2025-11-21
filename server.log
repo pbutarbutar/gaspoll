@@ -1,4 +1,9 @@
 nohup: ignoring input
-2025/11/20 15:29:45 Gaspoll server listening on :18200
+2025/11/21 13:38:11 Gaspoll server listening on :18200
 ⇨ http server started on [::]:18200
-{"time":"2025-11-20T15:43:53.688572853+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:18200","method":"GET","uri":"/mitra/m-jaya","user_agent":"curl/7.81.0","status":200,"error":"","latency":3267040,"latency_human":"3.26704ms","bytes_in":0,"bytes_out":8775}
+{"time":"2025-11-21T13:38:28.700623595+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:18200","method":"HEAD","uri":"/assets/gojek.svg","user_agent":"curl/7.81.0","status":405,"error":"code=405, message=Method Not Allowed","latency":10927,"latency_human":"10.927µs","bytes_in":0,"bytes_out":0}
+{"time":"2025-11-21T13:38:55.715832415+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:18200","method":"GET","uri":"/assets/gojek.svg","user_agent":"curl/7.81.0","status":200,"error":"","latency":9506758,"latency_human":"9.506758ms","bytes_in":0,"bytes_out":648}
+{"time":"2025-11-21T13:41:18.233903448+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:18200","method":"HEAD","uri":"/assets/gojek.svg","user_agent":"curl/7.81.0","status":405,"error":"code=405, message=Method Not Allowed","latency":307709,"latency_human":"307.709µs","bytes_in":0,"bytes_out":0}
+{"time":"2025-11-21T13:41:35.678172514+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:18200","method":"GET","uri":"/assets/gojek.svg","user_agent":"curl/7.81.0","status":200,"error":"","latency":2769017,"latency_human":"2.769017ms","bytes_in":0,"bytes_out":648}
+{"time":"2025-11-21T14:06:03.138558098+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:18200","method":"GET","uri":"/","user_agent":"curl/7.81.0","status":200,"error":"","latency":6594147,"latency_human":"6.594147ms","bytes_in":0,"bytes_out":26779}
+{"time":"2025-11-21T14:06:17.706405028+07:00","id":"","remote_ip":"127.0.0.1","host":"localhost:18200","method":"GET","uri":"/","user_agent":"curl/7.81.0","status":200,"error":"","latency":1009361,"latency_human":"1.009361ms","bytes_in":0,"bytes_out":26769}

@@ -2,15 +2,42 @@
 <section class="grid md:grid-cols-2 gap-6 items-start">
   <div class="glass rounded-2xl p-5 border border-white/10 shadow-2xl">
     <p class="uppercase text-xs tracking-[0.3em] text-slate-300 mb-3">Produk utama</p>
-    <div class="grid md:grid-cols-2 gap-3">
-      {{ range $i, $cat := (slice "Topup Driver" "Pulsa" "Paket Internet" "Voucher Servis") }}
-      <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
-        <p class="text-xs text-slate-300 uppercase tracking-wide">{{ $cat }}</p>
-        <p class="text-lg text-white font-semibold">{{ if eq $cat "Topup Driver" }}Topup Gojek/Grab/Maxim/InDrive{{ else if eq $cat "Pulsa" }}Pulsa semua operator{{ else if eq $cat "Paket Internet" }}Kuota harian & bulanan{{ else }}Voucher servis bengkel{{ end }}</p>
-        <p class="text-sm text-slate-200">Bayar QRIS/VA/E-Wallet, konfirmasi via WA.</p>
-        <a href="/products" class="inline-block mt-3 px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm">Beli {{ $cat }}</a>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <!-- Gojek -->
+      <div class="rounded-2xl bg-white/5 border border-white/10 p-4 flex flex-col items-start">
+        <img src="/assets/gojek.svg?v=2" alt="Gojek" class="w-12 h-12 rounded-md mb-3 object-cover"/>
+        <p class="text-xs text-slate-300 uppercase tracking-wide">Gojek Driver</p>
+        <p class="text-lg text-white font-semibold">Topup Gojek Driver</p>
+        <p class="text-sm text-slate-200">Isi saldo driver Gojek instan.</p>
+        <a href="/products?provider=Gojek" class="inline-block mt-3 px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm">Topup Sekarang!</a>
       </div>
-      {{ end }}
+
+      <!-- Grab -->
+      <div class="rounded-2xl bg-white/5 border border-white/10 p-4 flex flex-col items-start">
+        <img src="/assets/grab.svg?v=2" alt="Grab" class="w-12 h-12 rounded-md mb-3 object-cover"/>
+        <p class="text-xs text-slate-300 uppercase tracking-wide">Grab Driver</p>
+        <p class="text-lg text-white font-semibold">Topup Grab Driver</p>
+        <p class="text-sm text-slate-200">Topup cepat untuk driver Grab.</p>
+        <a href="/products?provider=Grab" class="inline-block mt-3 px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm">Topup Sekarang!</a>
+      </div>
+
+      <!-- Maxim -->
+      <div class="rounded-2xl bg-white/5 border border-white/10 p-4 flex flex-col items-start">
+        <img src="/assets/maxim.svg?v=2" alt="Maxim" class="w-12 h-12 rounded-md mb-3 object-cover"/>
+        <p class="text-xs text-slate-300 uppercase tracking-wide">Maxim Driver</p>
+        <p class="text-lg text-white font-semibold">Topup Maxim Driver</p>
+        <p class="text-sm text-slate-200">Topup voucher Maxim untuk driver.</p>
+        <a href="/products?provider=Maxim" class="inline-block mt-3 px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm">Topup Sekarang!</a>
+      </div>
+
+      <!-- InDrive -->
+      <div class="rounded-2xl bg-white/5 border border-white/10 p-4 flex flex-col items-start">
+        <img src="/assets/indrive.svg?v=2" alt="InDrive" class="w-12 h-12 rounded-md mb-3 object-cover"/>
+        <p class="text-xs text-slate-300 uppercase tracking-wide">InDriver</p>
+        <p class="text-lg text-white font-semibold">Topup InDrive</p>
+        <p class="text-sm text-slate-200">Topup cepat untuk InDrive driver.</p>
+        <a href="/products?provider=InDrive" class="inline-block mt-3 px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm">Topup Sekarang!</a>
+      </div>
     </div>
   </div>
 
@@ -22,18 +49,24 @@
       <a href="/login" class="px-4 py-2 rounded-full bg-emerald-500 text-slate-900 font-semibold">Masuk / Daftar Driver</a>
       <a href="/products" class="px-4 py-2 rounded-full border border-white/30 text-white">Lihat Produk</a>
     </div>
-    <div class="grid grid-cols-3 gap-3 text-sm text-slate-100">
+    <div class="grid grid-cols-2 gap-3 text-sm text-slate-100">
       <div class="glass rounded-xl p-3">
-        <div class="text-xl font-semibold">3 menit</div>
-        <div class="text-slate-300">Checkout cepat htmx</div>
+        <div class="text-xl font-semibold">Isi Token PLN</div>
+        <div class="text-slate-300">Top up token listrik cepat dan aman.</div>
+        <form action="/products" method="get" class="space-y-2 mt-2">
+          <label class="text-xs text-slate-300 block">Nomor Meteran</label>
+          <input name="meteran" type="text" placeholder="Contoh: 12345678901" class="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400">
+          <button class="w-full bg-emerald-500 text-slate-900 font-semibold rounded-lg py-2">Beli</button>
+        </form>
       </div>
       <div class="glass rounded-xl p-3">
-        <div class="text-xl font-semibold">Voucher QR</div>
-        <div class="text-slate-300">Redeem di bengkel mitra</div>
-      </div>
-      <div class="glass rounded-xl p-3">
-        <div class="text-xl font-semibold">GRPC ready</div>
-        <div class="text-slate-300">Backend layer siap di swap</div>
+        <div class="text-xl font-semibold">Topup Emoney</div>
+        <div class="text-slate-300">Isi saldo e-money tanpa ribet.</div>
+        <form action="/products" method="get" class="space-y-2 mt-2">
+          <label class="text-xs text-slate-300 block">Nomor Handphone</label>
+          <input name="hp" type="tel" placeholder="Contoh: 081234567890" class="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400">
+          <button class="w-full bg-emerald-500 text-slate-900 font-semibold rounded-lg py-2">Beli</button>
+        </form>
       </div>
     </div>
   </div>
@@ -42,7 +75,6 @@
       <div>
         <p class="text-2xl font-bold text-white">Produk Lainnya</p>
       </div>
-      <span class="px-3 py-1 rounded-full bg-white/10 text-emerald-300 text-xs">Reward aktif</span>
     </div>
     <div class="grid grid-cols-2 gap-3 text-sm">
       {{ range $i, $p := .products }}
@@ -70,10 +102,15 @@
     <form action="/ipl" method="get" class="space-y-3">
       <div>
         <label class="text-xs text-slate-300">Pilih Perumahan</label>
-        <select name="perumahan" class="w-full mt-1 rounded-lg bg-white/5 p-2 text-white">
-          <option value="Puri Arasana">Perumah Puri Arasana</option>
-          <option value="BSD">Perumah BSD</option>
-        </select>
+        <div class="relative mt-1">
+          <select name="perumahan" class="w-full appearance-none rounded-lg bg-black/20 backdrop-blur-md border border-white/10 px-4 py-2 pr-10 text-white placeholder-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-400">
+            <option value="Puri Arasana">Perumah Puri Arasana</option>
+            <option value="BSD">Perumah BSD</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+            <svg class="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+        </div>
       </div>
       <div>
         <label class="text-xs text-slate-300">Nomor Rumah</label>
@@ -168,6 +205,7 @@
   {{ end }}
 </div>
 </section>
+
 {{ end }}
 
 {{ define "home.html" }}
