@@ -79,15 +79,37 @@ func (a *App) handleHome(c echo.Context) error {
 	}
 	if len(mitras) == 0 {
 		mitras = []*entity.Mitra{
-			{ID: "m-1", Name: "Mitra 1", Address: "Jl. Dummy 1", Location: "Depok", Promo: "Diskon 10%", Services: []string{"Servis ringan", "Ganti oli"}, Distance: "1 km"},
-			{ID: "m-2", Name: "Mitra 2", Address: "Jl. Dummy 2", Location: "Depok", Promo: "Voucher 25k", Services: []string{"Tune up", "Rem"}, Distance: "2 km"},
-			{ID: "m-3", Name: "Mitra 3", Address: "Jl. Dummy 3", Location: "Cikarang", Promo: "Gratis cek ban", Services: []string{"Ban", "Spooring"}, Distance: "3 km"},
-			{ID: "m-4", Name: "Mitra 4", Address: "Jl. Dummy 4", Location: "Cikarang", Promo: "Diskon 15%", Services: []string{"Balancing", "Oli"}, Distance: "4 km"},
-			{ID: "m-5", Name: "Mitra 5", Address: "Jl. Dummy 5", Location: "Bekasi", Promo: "Free filter", Services: []string{"Filter", "Tune up"}, Distance: "5 km"},
-			{ID: "m-6", Name: "Mitra 6", Address: "Jl. Dummy 6", Location: "Bekasi", Promo: "Voucher 40k", Services: []string{"Servis ringan"}, Distance: "6 km"},
-			{ID: "m-7", Name: "Mitra 7", Address: "Jl. Dummy 7", Location: "Bogor", Promo: "Diskon oli", Services: []string{"Oli", "Cuci motor"}, Distance: "7 km"},
-			{ID: "m-8", Name: "Mitra 8", Address: "Jl. Dummy 8", Location: "Bogor", Promo: "Gratis cek", Services: []string{"Cek mesin"}, Distance: "8 km"},
-			{ID: "m-9", Name: "Mitra 9", Address: "Jl. Dummy 9", Location: "Bogor", Promo: "Diskon ban", Services: []string{"Ban"}, Distance: "9 km"},
+			// Depok (6)
+			{ID: "m-1", Name: "Oto Bengkel", Address: "Jl. Melati No. 12", Location: "Depok", Promo: "Diskon oli 20%", Services: []string{"Ganti oli", "Tune up"}, Distance: "1.2 km"},
+			{ID: "m-2", Name: "Garasi Juara", Address: "Jl. Pahlawan No. 45", Location: "Depok", Promo: "Voucher servis ringan", Services: []string{"Spooring", "Balancing"}, Distance: "3 km"},
+			{ID: "m-3", Name: "Sentosa Motor", Address: "Jl. Sudirman No. 10", Location: "Depok", Promo: "Diskon filter udara", Services: []string{"Filter udara", "Tune up"}, Distance: "4.5 km"},
+			{ID: "m-4", Name: "Lenteng Motor", Address: "Jl. Lenteng Agung Raya", Location: "Depok", Promo: "Cek rem gratis", Services: []string{"Cek rem", "Ganti kampas"}, Distance: "2.9 km"},
+			{ID: "m-5", Name: "Margonda Service", Address: "Jl. Margonda Raya No. 88", Location: "Depok", Promo: "Diskon servis 15%", Services: []string{"Servis ringan", "Ganti oli"}, Distance: "3.4 km"},
+			{ID: "m-6", Name: "Sawangan Garage", Address: "Jl. Raya Sawangan", Location: "Depok", Promo: "Voucher 25k", Services: []string{"Tune up", "Ganti ban"}, Distance: "5 km"},
+
+			// Cikarang (6)
+			{ID: "m-7", Name: "Jaya Auto", Address: "Jl. Panjang No. 88", Location: "Cikarang", Promo: "Voucher 25k", Services: []string{"Spooring", "Balancing"}, Distance: "6 km"},
+			{ID: "m-8", Name: "Green Garage", Address: "Jl. Cemara No. 2", Location: "Cikarang", Promo: "Paket oli hemat", Services: []string{"Ganti oli", "Cuci motor"}, Distance: "2.8 km"},
+			{ID: "m-9", Name: "Delta Service", Address: "Jl. Industri No. 5", Location: "Cikarang", Promo: "Diskon tune up 10%", Services: []string{"Tune up", "Ganti busi"}, Distance: "4.2 km"},
+			{ID: "m-10", Name: "Mega Auto", Address: "Jl. Boulevard Cikarang", Location: "Cikarang", Promo: "Cek motor gratis", Services: []string{"Cek motor", "Ganti oli"}, Distance: "3.7 km"},
+			{ID: "m-11", Name: "C-Tech Workshop", Address: "Jl. Kenari No. 3", Location: "Cikarang", Promo: "Diskon kampas rem 12%", Services: []string{"Rem", "Suspensi"}, Distance: "5.3 km"},
+			{ID: "m-12", Name: "Benua Motor", Address: "JL. Anggrek Industri", Location: "Cikarang", Promo: "Gratis nitrogen ban", Services: []string{"Isi nitrogen", "Tambal ban"}, Distance: "3 km"},
+
+			// Bekasi (6)
+			{ID: "m-13", Name: "Bengkel Cepat", Address: "Jl. Raya Karet", Location: "Bekasi", Promo: "Gratis cek motor", Services: []string{"Cek motor", "Ganti ban"}, Distance: "5 km"},
+			{ID: "m-14", Name: "Bengkel Berkah", Address: "Jl. Anggrek No. 9", Location: "Bekasi", Promo: "Diskon ban 10%", Services: []string{"Ganti ban", "Tambal ban"}, Distance: "2.1 km"},
+			{ID: "m-15", Name: "Patriot Garage", Address: "Jl. Ahmad Yani Bekasi", Location: "Bekasi", Promo: "Voucher servis ringan", Services: []string{"Servis ringan", "Ganti oli"}, Distance: "2.9 km"},
+			{ID: "m-16", Name: "Harapan Motor", Address: "Jl. Harapan Indah", Location: "Bekasi", Promo: "Diskon 15% spooring", Services: []string{"Spooring", "Balancing"}, Distance: "4.6 km"},
+			{ID: "m-17", Name: "Galaxy Service", Address: "Jl. Galaxy Raya", Location: "Bekasi", Promo: "Gratis konsultasi mesin", Services: []string{"Tune up", "Cek mesin"}, Distance: "3.3 km"},
+			{ID: "m-18", Name: "Summarecon Auto", Address: "Jl. Boulevard Selatan", Location: "Bekasi", Promo: "Diskon filter & oli 10%", Services: []string{"Ganti oli", "Filter udara"}, Distance: "5.5 km"},
+
+			// Bogor (6)
+			{ID: "m-19", Name: "Laju Motor", Address: "Jl. Kramat No. 3", Location: "Bogor", Promo: "Gratis cek rem", Services: []string{"Cek rem", "Tune up"}, Distance: "4 km"},
+			{ID: "m-20", Name: "Prima Service", Address: "Jl. Kenanga No. 7", Location: "Bogor", Promo: "Diskon servis 15%", Services: []string{"Servis ringan", "Ganti oli"}, Distance: "3.6 km"},
+			{ID: "m-21", Name: "Pajajaran Garage", Address: "Jl. Pajajaran No. 10", Location: "Bogor", Promo: "Voucher 30k", Services: []string{"Tune up", "Ganti busi"}, Distance: "2.4 km"},
+			{ID: "m-22", Name: "Puncak Tech", Address: "Jl. Raya Puncak KM 10", Location: "Bogor", Promo: "Diskon rem 12%", Services: []string{"Rem", "Suspensi"}, Distance: "7 km"},
+			{ID: "m-23", Name: "Taman Safari Auto", Address: "Jl. Safari", Location: "Bogor", Promo: "Gratis cek ban", Services: []string{"Ban", "Cuci motor"}, Distance: "8.5 km"},
+			{ID: "m-24", Name: "Dramaga Motor", Address: "Jl. Dramaga Raya", Location: "Bogor", Promo: "Diskon oli 10%", Services: []string{"Ganti oli", "Filter udara"}, Distance: "5.2 km"},
 		}
 	}
 
