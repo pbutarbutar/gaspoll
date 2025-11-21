@@ -79,15 +79,15 @@ func (a *App) handleHome(c echo.Context) error {
 	}
 	if len(mitras) == 0 {
 		mitras = []*entity.Mitra{
-			{ID: "m-1", Name: "Mitra 1", Address: "Jl. Dummy 1", Promo: "Diskon 10%", Services: []string{"Servis ringan", "Ganti oli"}, Distance: "1 km"},
-			{ID: "m-2", Name: "Mitra 2", Address: "Jl. Dummy 2", Promo: "Voucher 25k", Services: []string{"Tune up", "Rem"}, Distance: "2 km"},
-			{ID: "m-3", Name: "Mitra 3", Address: "Jl. Dummy 3", Promo: "Gratis cek ban", Services: []string{"Ban", "Spooring"}, Distance: "3 km"},
-			{ID: "m-4", Name: "Mitra 4", Address: "Jl. Dummy 4", Promo: "Diskon 15%", Services: []string{"Balancing", "Oli"}, Distance: "4 km"},
-			{ID: "m-5", Name: "Mitra 5", Address: "Jl. Dummy 5", Promo: "Free filter", Services: []string{"Filter", "Tune up"}, Distance: "5 km"},
-			{ID: "m-6", Name: "Mitra 6", Address: "Jl. Dummy 6", Promo: "Voucher 40k", Services: []string{"Servis ringan"}, Distance: "6 km"},
-			{ID: "m-7", Name: "Mitra 7", Address: "Jl. Dummy 7", Promo: "Diskon oli", Services: []string{"Oli", "Cuci motor"}, Distance: "7 km"},
-			{ID: "m-8", Name: "Mitra 8", Address: "Jl. Dummy 8", Promo: "Gratis cek", Services: []string{"Cek mesin"}, Distance: "8 km"},
-			{ID: "m-9", Name: "Mitra 9", Address: "Jl. Dummy 9", Promo: "Diskon ban", Services: []string{"Ban"}, Distance: "9 km"},
+			{ID: "m-1", Name: "Mitra 1", Address: "Jl. Dummy 1", Location: "Depok", Promo: "Diskon 10%", Services: []string{"Servis ringan", "Ganti oli"}, Distance: "1 km"},
+			{ID: "m-2", Name: "Mitra 2", Address: "Jl. Dummy 2", Location: "Depok", Promo: "Voucher 25k", Services: []string{"Tune up", "Rem"}, Distance: "2 km"},
+			{ID: "m-3", Name: "Mitra 3", Address: "Jl. Dummy 3", Location: "Cikarang", Promo: "Gratis cek ban", Services: []string{"Ban", "Spooring"}, Distance: "3 km"},
+			{ID: "m-4", Name: "Mitra 4", Address: "Jl. Dummy 4", Location: "Cikarang", Promo: "Diskon 15%", Services: []string{"Balancing", "Oli"}, Distance: "4 km"},
+			{ID: "m-5", Name: "Mitra 5", Address: "Jl. Dummy 5", Location: "Bekasi", Promo: "Free filter", Services: []string{"Filter", "Tune up"}, Distance: "5 km"},
+			{ID: "m-6", Name: "Mitra 6", Address: "Jl. Dummy 6", Location: "Bekasi", Promo: "Voucher 40k", Services: []string{"Servis ringan"}, Distance: "6 km"},
+			{ID: "m-7", Name: "Mitra 7", Address: "Jl. Dummy 7", Location: "Bogor", Promo: "Diskon oli", Services: []string{"Oli", "Cuci motor"}, Distance: "7 km"},
+			{ID: "m-8", Name: "Mitra 8", Address: "Jl. Dummy 8", Location: "Bogor", Promo: "Gratis cek", Services: []string{"Cek mesin"}, Distance: "8 km"},
+			{ID: "m-9", Name: "Mitra 9", Address: "Jl. Dummy 9", Location: "Bogor", Promo: "Diskon ban", Services: []string{"Ban"}, Distance: "9 km"},
 		}
 	}
 
@@ -112,11 +112,42 @@ func (a *App) handleHome(c echo.Context) error {
 		{"label": "InDrive", "product": topups["indrive"]},
 	}
 
+	locationOrder := []string{"Depok", "Cikarang", "Bekasi", "Bogor"}
+	groupedMitras := map[string][]*entity.Mitra{}
+	for _, m := range mitras {
+		loc := m.Location
+		if loc == "" {
+			loc = "Lainnya"
+		}
+		groupedMitras[loc] = append(groupedMitras[loc], m)
+	}
+
+	mitraLocations := []struct {
+		Name  string
+		Items []*entity.Mitra
+	}{}
+	for _, loc := range locationOrder {
+		if items, ok := groupedMitras[loc]; ok {
+			mitraLocations = append(mitraLocations, struct {
+				Name  string
+				Items []*entity.Mitra
+			}{Name: loc, Items: items})
+			delete(groupedMitras, loc)
+		}
+	}
+	for loc, items := range groupedMitras {
+		mitraLocations = append(mitraLocations, struct {
+			Name  string
+			Items []*entity.Mitra
+		}{Name: loc, Items: items})
+	}
+
 	return a.render(c, "home.html", map[string]interface{}{
-		"title":      "Gaspoll - Topup Driver & Reward",
-		"mitras":     mitras,
-		"products":   products,
-		"topupCards": topupCards,
+		"title":          "Gaspoll - Topup Driver & Reward",
+		"mitras":         mitras,
+		"mitraLocations": mitraLocations,
+		"products":       products,
+		"topupCards":     topupCards,
 	})
 }
 

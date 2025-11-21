@@ -62,6 +62,7 @@ type Mitra struct {
 	ID              string
 	Name            string
 	Address         string
+	Location        string
 	Promo           string
 	Services        []string
 	Distance        string

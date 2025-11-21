@@ -62,20 +62,20 @@ func (s *Store) seed() {
 	}
 
 	mitras := []*entity.Mitra{
-		{ID: "m-otobengkel", Name: "Oto Bengkel", Address: "Jl. Melati No. 12", Promo: "Diskon oli 20%", Services: []string{"Ganti oli", "Tune up"}, Distance: "1.2 km", BasePrice: 120000, DiscountPercent: 20, PromoDetail: "Promo ini bisa didapatkan dengan syarat top driver dalam 1 minggu 10X.", Packages: []entity.Package{
+		{ID: "m-otobengkel", Name: "Oto Bengkel", Address: "Jl. Melati No. 12", Location: "Depok", Promo: "Diskon oli 20%", Services: []string{"Ganti oli", "Tune up"}, Distance: "1.2 km", BasePrice: 120000, DiscountPercent: 20, PromoDetail: "Promo ini bisa didapatkan dengan syarat top driver dalam 1 minggu 10X.", Packages: []entity.Package{
 			{ID: "pkg-1", Name: "Service + Ganti Oli", Description: "Service lengkap + penggantian oli mesin standar.", BasePrice: 120000, DiscountPercent: 20},
 			{ID: "pkg-2", Name: "Ganti Kampas Rem", Description: "Penggantian kampas rem depan atau belakang sesuai kebutuhan.", BasePrice: 150000, DiscountPercent: 10},
 			{ID: "pkg-3", Name: "Ganti 1 Ban Motor", Description: "Penggantian 1 buah ban motor termasuk pemasangan dan penyeimbangan.", BasePrice: 200000, DiscountPercent: 15},
 			{ID: "pkg-4", Name: "Ganti 2 Ban Motor", Description: "Penggantian 2 ban motor (diskon paket).", BasePrice: 380000, DiscountPercent: 18},
 		}},
-		{ID: "m-garasi", Name: "Garasi Juara", Address: "Jl. Pahlawan No. 45", Promo: "Voucher servis ringan", Services: []string{"Spooring", "Balancing"}, Distance: "3 km", BasePrice: 85000, DiscountPercent: 0, PromoDetail: "Tunjukkan voucher untuk servis ringan gratis (syarat berlaku)."},
-		{ID: "m-cepat", Name: "Bengkel Cepat", Address: "Jl. Raya Karet", Promo: "Gratis cek motor", Services: []string{"Cek motor", "Ganti ban"}, Distance: "5 km", BasePrice: 0, DiscountPercent: 100, PromoDetail: "Gratis cek motor, hanya berlaku untuk 1 kali per pengguna."},
-		{ID: "m-berkah", Name: "Bengkel Berkah", Address: "Jl. Anggrek No. 9", Promo: "Diskon ban 10%", Services: []string{"Ganti ban", "Tambal ban"}, Distance: "2.1 km", BasePrice: 300000, DiscountPercent: 10, PromoDetail: "Diskon otomatis untuk tipe ban tertentu."},
-		{ID: "m-laju", Name: "Laju Motor", Address: "Jl. Kramat No. 3", Promo: "Gratis cek rem", Services: []string{"Cek rem", "Tune up"}, Distance: "4 km", BasePrice: 0, DiscountPercent: 100, PromoDetail: "Cek rem gratis, tanpa pembelian komponen."},
-		{ID: "m-prima", Name: "Prima Service", Address: "Jl. Kenanga No. 7", Promo: "Diskon servis 15%", Services: []string{"Servis ringan", "Ganti oli"}, Distance: "3.6 km", BasePrice: 150000, DiscountPercent: 15, PromoDetail: "Diskon berlaku untuk layanan servis ringan."},
-		{ID: "m-jaya", Name: "Jaya Auto", Address: "Jl. Panjang No. 88", Promo: "Voucher 25k", Services: []string{"Spooring", "Balancing"}, Distance: "6 km", BasePrice: 250000, DiscountPercent: 10, PromoDetail: "Voucher potongan langsung sebesar 25k untuk layanan tertentu."},
-		{ID: "m-green", Name: "Green Garage", Address: "Jl. Cemara No. 2", Promo: "Paket oli hemat", Services: []string{"Ganti oli", "Cuci motor"}, Distance: "2.8 km", BasePrice: 100000, DiscountPercent: 15, PromoDetail: "Paket hemat untuk ganti oli + cuci motor."},
-		{ID: "m-sentosa", Name: "Sentosa Motor", Address: "Jl. Sudirman No. 10", Promo: "Diskon filter udara", Services: []string{"Filter udara", "Tune up"}, Distance: "4.5 km", BasePrice: 90000, DiscountPercent: 10, PromoDetail: "Diskon filter udara, tidak termasuk pemasangan khusus."},
+		{ID: "m-garasi", Name: "Garasi Juara", Address: "Jl. Pahlawan No. 45", Location: "Depok", Promo: "Voucher servis ringan", Services: []string{"Spooring", "Balancing"}, Distance: "3 km", BasePrice: 85000, DiscountPercent: 0, PromoDetail: "Tunjukkan voucher untuk servis ringan gratis (syarat berlaku)."},
+		{ID: "m-cepat", Name: "Bengkel Cepat", Address: "Jl. Raya Karet", Location: "Bekasi", Promo: "Gratis cek motor", Services: []string{"Cek motor", "Ganti ban"}, Distance: "5 km", BasePrice: 0, DiscountPercent: 100, PromoDetail: "Gratis cek motor, hanya berlaku untuk 1 kali per pengguna."},
+		{ID: "m-berkah", Name: "Bengkel Berkah", Address: "Jl. Anggrek No. 9", Location: "Bekasi", Promo: "Diskon ban 10%", Services: []string{"Ganti ban", "Tambal ban"}, Distance: "2.1 km", BasePrice: 300000, DiscountPercent: 10, PromoDetail: "Diskon otomatis untuk tipe ban tertentu."},
+		{ID: "m-laju", Name: "Laju Motor", Address: "Jl. Kramat No. 3", Location: "Bogor", Promo: "Gratis cek rem", Services: []string{"Cek rem", "Tune up"}, Distance: "4 km", BasePrice: 0, DiscountPercent: 100, PromoDetail: "Cek rem gratis, tanpa pembelian komponen."},
+		{ID: "m-prima", Name: "Prima Service", Address: "Jl. Kenanga No. 7", Location: "Bogor", Promo: "Diskon servis 15%", Services: []string{"Servis ringan", "Ganti oli"}, Distance: "3.6 km", BasePrice: 150000, DiscountPercent: 15, PromoDetail: "Diskon berlaku untuk layanan servis ringan."},
+		{ID: "m-jaya", Name: "Jaya Auto", Address: "Jl. Panjang No. 88", Location: "Cikarang", Promo: "Voucher 25k", Services: []string{"Spooring", "Balancing"}, Distance: "6 km", BasePrice: 250000, DiscountPercent: 10, PromoDetail: "Voucher potongan langsung sebesar 25k untuk layanan tertentu."},
+		{ID: "m-green", Name: "Green Garage", Address: "Jl. Cemara No. 2", Location: "Cikarang", Promo: "Paket oli hemat", Services: []string{"Ganti oli", "Cuci motor"}, Distance: "2.8 km", BasePrice: 100000, DiscountPercent: 15, PromoDetail: "Paket hemat untuk ganti oli + cuci motor."},
+		{ID: "m-sentosa", Name: "Sentosa Motor", Address: "Jl. Sudirman No. 10", Location: "Depok", Promo: "Diskon filter udara", Services: []string{"Filter udara", "Tune up"}, Distance: "4.5 km", BasePrice: 90000, DiscountPercent: 10, PromoDetail: "Diskon filter udara, tidak termasuk pemasangan khusus."},
 	}
 
 	order := &entity.Order{
