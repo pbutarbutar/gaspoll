@@ -25,11 +25,11 @@
 </head>
 <body class="min-h-screen">
   <header class="backdrop-blur-md sticky top-0 z-30">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+    <div x-data="{ open: false }" class="relative max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
       <a href="/" class="flex items-center space-x-3">
         <img src="/assets/gaspoll-logo.svg" alt="Gaspoll" class="h-10 w-auto drop-shadow" loading="lazy"/>
       </a>
-      <nav class="flex items-center space-x-4 text-sm text-slate-200">
+      <nav class="hidden md:flex items-center space-x-4 text-sm text-slate-200">
         <a href="/products" class="hover:text-white">Produk</a>
         <a href="/mitra/redeem" class="hover:text-white">Redeem Mitra</a>
         <a href="/admin/settlement" class="hover:text-white">Settlement</a>
@@ -39,6 +39,37 @@
           <a href="/login" class="bg-emerald-500 text-slate-900 font-semibold rounded-full px-3 py-1">Masuk</a>
         {{ end }}
       </nav>
+      <button @click="open = !open" class="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/15 transition" aria-label="Toggle menu">
+        <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"/>
+        </svg>
+        <svg x-show="open" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+      <div x-show="open" x-transition.opacity class="md:hidden absolute top-full left-0 w-full pt-3">
+        <div class="rounded-2xl border border-white/15 bg-slate-950/85 backdrop-blur-xl shadow-2xl p-4">
+          <div class="flex flex-col space-y-3 text-sm text-slate-100">
+            <a href="/products" class="flex items-center justify-between hover:text-white">
+              <span>Produk</span>
+              <span class="text-xs text-emerald-300">Topup & Pulsa</span>
+            </a>
+            <a href="/mitra/redeem" class="flex items-center justify-between hover:text-white">
+              <span>Redeem Mitra</span>
+              <span class="text-xs text-emerald-300">Pakai poin</span>
+            </a>
+            <a href="/admin/settlement" class="flex items-center justify-between hover:text-white">
+              <span>Settlement</span>
+              <span class="text-xs text-emerald-300">Admin</span>
+            </a>
+            {{ if .user }}
+              <a href="/dashboard" class="w-full text-center bg-white/10 border border-white/20 rounded-lg px-3 py-2 font-semibold text-white">Dashboard</a>
+            {{ else }}
+              <a href="/login" class="w-full text-center bg-emerald-500 text-slate-900 font-semibold rounded-lg px-3 py-2">Masuk</a>
+            {{ end }}
+          </div>
+        </div>
+      </div>
     </div>
   </header>
   <main class="max-w-6xl mx-auto px-4 py-8 space-y-10">

@@ -48,6 +48,42 @@ func (a *App) handleLogin(c echo.Context) error {
 	return c.Redirect(http.StatusFound, "/dashboard")
 }
 
+func groupMitrasByLocation(mitras []*entity.Mitra) []struct {
+	Name  string
+	Items []*entity.Mitra
+} {
+	locationOrder := []string{"Depok", "Cikarang", "Bekasi", "Bogor"}
+	groupedMitras := map[string][]*entity.Mitra{}
+	for _, m := range mitras {
+		loc := m.Location
+		if loc == "" {
+			loc = "Lainnya"
+		}
+		groupedMitras[loc] = append(groupedMitras[loc], m)
+	}
+
+	result := []struct {
+		Name  string
+		Items []*entity.Mitra
+	}{}
+	for _, loc := range locationOrder {
+		if items, ok := groupedMitras[loc]; ok {
+			result = append(result, struct {
+				Name  string
+				Items []*entity.Mitra
+			}{Name: loc, Items: items})
+			delete(groupedMitras, loc)
+		}
+	}
+	for loc, items := range groupedMitras {
+		result = append(result, struct {
+			Name  string
+			Items []*entity.Mitra
+		}{Name: loc, Items: items})
+	}
+	return result
+}
+
 func (a *App) handleRegister(c echo.Context) error {
 	name := c.FormValue("name")
 	phone := c.FormValue("phone")
@@ -134,35 +170,7 @@ func (a *App) handleHome(c echo.Context) error {
 		{"label": "InDrive", "product": topups["indrive"]},
 	}
 
-	locationOrder := []string{"Depok", "Cikarang", "Bekasi", "Bogor"}
-	groupedMitras := map[string][]*entity.Mitra{}
-	for _, m := range mitras {
-		loc := m.Location
-		if loc == "" {
-			loc = "Lainnya"
-		}
-		groupedMitras[loc] = append(groupedMitras[loc], m)
-	}
-
-	mitraLocations := []struct {
-		Name  string
-		Items []*entity.Mitra
-	}{}
-	for _, loc := range locationOrder {
-		if items, ok := groupedMitras[loc]; ok {
-			mitraLocations = append(mitraLocations, struct {
-				Name  string
-				Items []*entity.Mitra
-			}{Name: loc, Items: items})
-			delete(groupedMitras, loc)
-		}
-	}
-	for loc, items := range groupedMitras {
-		mitraLocations = append(mitraLocations, struct {
-			Name  string
-			Items []*entity.Mitra
-		}{Name: loc, Items: items})
-	}
+	mitraLocations := groupMitrasByLocation(mitras)
 
 	return a.render(c, "home.html", map[string]interface{}{
 		"title":          "Gaspoll - Topup Driver & Reward",
@@ -302,10 +310,13 @@ func (a *App) showMitraRedeem(c echo.Context) error {
 func (a *App) showIPL(c echo.Context) error {
 	perumahan := c.QueryParam("perumahan")
 	nomor := c.QueryParam("nomor")
+	mitras, _ := a.mitra.List()
+	mitraLocations := groupMitrasByLocation(mitras)
 	if perumahan == "" && nomor == "" {
 		// render empty form result page
 		return a.render(c, "ipl_list.html", map[string]interface{}{
-			"title": "Tagihan IPL",
+			"title":          "Tagihan IPL",
+			"mitraLocations": mitraLocations,
 		})
 	}
 
@@ -320,10 +331,11 @@ func (a *App) showIPL(c echo.Context) error {
 	}
 
 	return a.render(c, "ipl_list.html", map[string]interface{}{
-		"title":     "Tagihan IPL",
-		"Perumahan": perumahan,
-		"Nomor":     nomor,
-		"Bills":     bills,
+		"title":          "Tagihan IPL",
+		"Perumahan":      perumahan,
+		"Nomor":          nomor,
+		"Bills":          bills,
+		"mitraLocations": mitraLocations,
 	})
 }
 
@@ -334,12 +346,15 @@ func (a *App) handleIPLPAY(c echo.Context) error {
 	period := c.FormValue("period")
 
 	// In a real app, you'd call payment & mark bill paid. Here we just show confirmation.
+	mitras, _ := a.mitra.List()
+	mitraLocations := groupMitrasByLocation(mitras)
 	return a.render(c, "ipl_list.html", map[string]interface{}{
-		"title":     "Pembayaran IPL",
-		"Perumahan": perumahan,
-		"Nomor":     nomor,
-		"Bills":     []IPLBill{},
-		"message":   "Pembayaran untuk periode " + period + " berhasil.",
+		"title":          "Pembayaran IPL",
+		"Perumahan":      perumahan,
+		"Nomor":          nomor,
+		"Bills":          []IPLBill{},
+		"message":        "Pembayaran untuk periode " + period + " berhasil.",
+		"mitraLocations": mitraLocations,
 	})
 }
 

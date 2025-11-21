@@ -40,4 +40,43 @@
   {{ end }}
 
 </div>
+
+{{ if .mitraLocations }}
+<section class="mt-10">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-xl font-semibold text-white">Jasa tukang mitra siap melayani</h2>
+    <a href="/mitra/redeem" class="text-sm underline text-slate-200">Lihat detail</a>
+  </div>
+  <div class="space-y-4">
+    {{ range .mitraLocations }}
+    <div class="glass rounded-2xl p-4 border border-white/10">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-3">
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-400"></span>
+          <h3 class="text-lg font-semibold text-white">{{ .Name }}</h3>
+        </div>
+        <span class="text-xs text-slate-300">{{ len .Items }} mitra</span>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        {{ range .Items }}
+        <div class="rounded-xl bg-white/5 border border-white/10 p-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-base font-semibold text-white">{{ .Name }}</p>
+              <p class="text-slate-300 text-sm">{{ .Address }}</p>
+            </div>
+            <span class="text-xs px-2 py-1 rounded-full bg-white/10 text-emerald-300">{{ .Distance }}</span>
+          </div>
+          <p class="mt-2 text-sm text-slate-200">{{ .Promo }}</p>
+          <div class="mt-3 flex flex-wrap gap-2 text-xs text-slate-200">
+            {{ range .Services }}<span class="bg-white/10 rounded-full px-2 py-1">{{ . }}</span>{{ end }}
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
 {{ end }}

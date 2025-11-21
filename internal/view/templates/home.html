@@ -1,7 +1,33 @@
 {{ define "content" }}
 <section class="grid md:grid-cols-2 gap-6 items-start">
+  <div class="space-y-4">
+    <p class="uppercase text-xs tracking-[0.4em] text-slate-300">E-commerce driver OJOL + reward point</p>
+    <h1 class="text-4xl md:text-5xl font-semibold text-white leading-tight">Topup driver, pulsa, paket data dengan <span class="text-emerald-400">reward point</span></h1>
+    <p class="text-slate-200 max-w-xl">Solusi praktis untuk driver: isi saldo, bayar tagihan, dapat benefit servis bengkel mitra.</p>
+
+    <div class="grid grid-cols-2 gap-3 text-sm text-slate-100 mt-4">
+      <div class="glass rounded-xl p-3">
+        <div class="text-xl font-semibold">Isi Token PLN</div>
+        <div class="text-slate-300">Top up token listrik cepat dan aman.</div>
+        <form action="/products" method="get" class="space-y-2 mt-2">
+          <label class="text-xs text-slate-300 block">Nomor Meteran</label>
+          <input name="meteran" type="text" placeholder="Contoh: 12345678901" class="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400">
+          <button class="w-full bg-emerald-500 text-slate-900 font-semibold rounded-lg py-2">Beli</button>
+        </form>
+      </div>
+      <div class="glass rounded-xl p-3">
+        <div class="text-xl font-semibold">Topup Emoney</div>
+        <div class="text-slate-300">Isi saldo e-money tanpa ribet.</div>
+        <form action="/products" method="get" class="space-y-2 mt-2">
+          <label class="text-xs text-slate-300 block">Nomor Handphone</label>
+          <input name="hp" type="tel" placeholder="Contoh: 081234567890" class="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400">
+          <button class="w-full bg-emerald-500 text-slate-900 font-semibold rounded-lg py-2">Beli</button>
+        </form>
+      </div>
+    </div>
+  </div>
   <div class="glass rounded-2xl p-5 border border-white/10 shadow-2xl">
-    <h2 class="text-2xl md:text-3xl font-semibold text-white mb-4 leading-tight">Produk utama</h2>
+    <h2 class="text-2xl md:text-3xl font-semibold text-white mb-4 leading-tight">Gaspoll Driver</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
       <!-- Gojek -->
       <div class="rounded-2xl bg-white/5 border border-white/10 p-4 flex flex-col items-start h-full">
@@ -53,33 +79,6 @@
         <div class="mt-auto w-full pt-3">
           <a href="/products?provider=InDrive" class="px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm">Topup Sekarang!</a>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="space-y-4">
-    <p class="uppercase text-xs tracking-[0.4em] text-slate-300">E-commerce driver OJOL + reward point</p>
-    <h1 class="text-4xl md:text-5xl font-semibold text-white leading-tight">Topup driver, pulsa, paket data dengan <span class="text-emerald-400">dengan reward point</span></h1>
-    <p class="text-slate-200 max-w-xl">Solusi praktis untuk driver: isi saldo, bayar tagihan, dapat benefit servis bengkel mitra.</p>
-   
-    <div class="grid grid-cols-2 gap-3 text-sm text-slate-100">
-      <div class="glass rounded-xl p-3">
-        <div class="text-xl font-semibold">Isi Token PLN</div>
-        <div class="text-slate-300">Top up token listrik cepat dan aman.</div>
-        <form action="/products" method="get" class="space-y-2 mt-2">
-          <label class="text-xs text-slate-300 block">Nomor Meteran</label>
-          <input name="meteran" type="text" placeholder="Contoh: 12345678901" class="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400">
-          <button class="w-full bg-emerald-500 text-slate-900 font-semibold rounded-lg py-2">Beli</button>
-        </form>
-      </div>
-      <div class="glass rounded-xl p-3">
-        <div class="text-xl font-semibold">Topup Emoney</div>
-        <div class="text-slate-300">Isi saldo e-money tanpa ribet.</div>
-        <form action="/products" method="get" class="space-y-2 mt-2">
-          <label class="text-xs text-slate-300 block">Nomor Handphone</label>
-          <input name="hp" type="tel" placeholder="Contoh: 081234567890" class="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400">
-          <button class="w-full bg-emerald-500 text-slate-900 font-semibold rounded-lg py-2">Beli</button>
-        </form>
       </div>
     </div>
   </div>
@@ -136,34 +135,6 @@
   </div>
 </section>
 
-<section class="mt-10 glass rounded-2xl p-5 border border-white/10">
-  <div class="flex items-center justify-between mb-4">
-    <div>
-      <p class="text-xs text-slate-300">Pilihan cepat</p>
-      <h2 class="text-xl font-semibold text-white">Topup Driver Favorit</h2>
-    </div>
-    <a href="/products" class="text-sm text-emerald-300 underline">Lihat semua produk</a>
-  </div>
-  <div class="grid md:grid-cols-4 gap-4">
-    {{ range .topupCards }}
-    {{ $p := .product }}
-    <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
-      <p class="text-xs text-slate-300 uppercase tracking-wide">{{ .label }}</p>
-      {{ if $p }}
-        <p class="text-lg text-white font-semibold">{{ $p.Name }}</p>
-        <p class="text-sm text-slate-200 mb-2">{{ $p.Description }}</p>
-        <p class="text-xl text-emerald-300 font-bold">{{ currency $p.Price }}</p>
-        <form action="/products" method="get" class="mt-3">
-          <button class="w-full bg-emerald-500 text-slate-900 font-semibold rounded-lg py-2">Beli sekarang</button>
-        </form>
-      {{ else }}
-        <p class="text-sm text-slate-200">Segera hadir.</p>
-      {{ end }}
-    </div>
-    {{ end }}
-  </div>
-</section>
-
 <section class="mt-10">
   <div class="flex items-center justify-between mb-4">
     <h2 class="text-xl font-semibold text-white">Bengkel mitra siap melayani</h2>
@@ -191,43 +162,6 @@
   {{ end }}
   {{ end }}
 </div>
-</section>
-
-<section class="mt-10">
-  <div class="flex items-center justify-between mb-4">
-    <h2 class="text-xl font-semibold text-white">Jasa tukang mitra siap melayani</h2>
-    <a href="/mitra/redeem" class="text-sm underline text-slate-200">Lihat detail</a>
-  </div>
-  <div class="space-y-4">
-    {{ range .mitraLocations }}
-    <div class="glass rounded-2xl p-4 border border-white/10">
-      <div class="flex items-center justify-between mb-3">
-        <div class="flex items-center gap-3">
-          <span class="inline-block w-2 h-2 rounded-full bg-emerald-400"></span>
-          <h3 class="text-lg font-semibold text-white">{{ .Name }}</h3>
-        </div>
-        <span class="text-xs text-slate-300">{{ len .Items }} mitra</span>
-      </div>
-      <div class="grid md:grid-cols-3 gap-4">
-        {{ range .Items }}
-        <div class="rounded-xl bg-white/5 border border-white/10 p-4">
-          <div class="flex items-center justify-between">
-            <div>
-              <p class="text-base font-semibold text-white">{{ .Name }}</p>
-              <p class="text-slate-300 text-sm">{{ .Address }}</p>
-            </div>
-            <span class="text-xs px-2 py-1 rounded-full bg-white/10 text-emerald-300">{{ .Distance }}</span>
-          </div>
-          <p class="mt-2 text-sm text-slate-200">{{ .Promo }}</p>
-          <div class="mt-3 flex flex-wrap gap-2 text-xs text-slate-200">
-            {{ range .Services }}<span class="bg-white/10 rounded-full px-2 py-1">{{ . }}</span>{{ end }}
-          </div>
-        </div>
-        {{ end }}
-      </div>
-    </div>
-    {{ end }}
-  </div>
 </section>
 
 {{ end }}
