@@ -161,5 +161,28 @@ func (a *App) render(c echo.Context, name string, data map[string]interface{}) e
 	// e.g. for "home.html" -> "content_home"
 	base := strings.TrimSuffix(name, ".html")
 	data["contentName"] = "content_" + base
+
+	if _, ok := data["title"]; !ok {
+		data["title"] = "Gaspoll — Driver Commerce & Rewards"
+	}
+	if _, ok := data["metaDescription"]; !ok {
+		data["metaDescription"] = "Gaspoll memudahkan driver topup saldo, beli paket data, dan mendapatkan reward bengkel mitra dengan cepat dan aman."
+	}
+	if _, ok := data["metaImage"]; !ok {
+		data["metaImage"] = "/assets/logo-wgaspoll.png?v=1"
+	}
+	if _, ok := data["metaURL"]; !ok {
+		scheme := c.Scheme()
+		if scheme == "" {
+			scheme = "https"
+		}
+		host := c.Request().Host
+		path := c.Request().URL.RequestURI()
+		if host != "" {
+			data["metaURL"] = scheme + "://" + host + path
+		} else {
+			data["metaURL"] = path
+		}
+	}
 	return c.Render(http.StatusOK, name, data)
 }

@@ -1,10 +1,26 @@
 {{ define "layout" }}
 <!doctype html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ .title }}</title>
+  <meta name="description" content="{{ .metaDescription }}">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="{{ .metaURL }}">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Gaspoll">
+  <meta property="og:title" content="{{ .title }}">
+  <meta property="og:description" content="{{ .metaDescription }}">
+  <meta property="og:image" content="{{ .metaImage }}">
+  <meta property="og:url" content="{{ .metaURL }}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ .title }}">
+  <meta name="twitter:description" content="{{ .metaDescription }}">
+  <meta name="twitter:image" content="{{ .metaImage }}">
+  <meta name="theme-color" content="#0b1021">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/htmx.org@1.9.10"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -15,19 +31,21 @@
                  radial-gradient(circle at 30% 70%, #22c55e 0, transparent 22%),
                  #0b1021;
       color: #e2e8f0;
+      overflow-x: hidden;
     }
     .glass {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
     }
+    [x-cloak] { display: none !important; }
   </style>
 </head>
 <body class="min-h-screen">
   <header class="backdrop-blur-md sticky top-0 z-30">
     <div x-data="{ open: false }" class="relative max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
       <a href="/" class="flex items-center space-x-3">
-        <img src="/assets/gaspoll-logo.svg" alt="Gaspoll" class="h-10 w-auto drop-shadow" loading="lazy"/>
+        <img src="/assets/logo-wgaspoll.png?v=1" alt="Gaspoll" class="h-10 w-auto drop-shadow" loading="lazy"/>
       </a>
       <nav class="hidden md:flex items-center space-x-4 text-sm text-slate-200">
         <a href="/products" class="hover:text-white">Produk</a>
@@ -78,7 +96,7 @@
   <footer class="mt-10 border-t border-white/10 bg-black/30">
     <div class="max-w-6xl mx-auto px-4 py-6 text-sm text-slate-200 grid md:grid-cols-3 gap-4">
       <div>
-        <img src="/assets/gaspoll-logo.svg" alt="Gaspoll" class="h-10 w-auto mb-2 drop-shadow" loading="lazy"/>
+        <img src="/assets/logo-wgaspoll.png?v=1" alt="Gaspoll" class="h-10 w-auto mb-2 drop-shadow" loading="lazy"/>
         <p class="text-slate-300">E-commerce driver dengan reward servis bengkel mitra. Topup, pulsa, paket data, voucher QR.</p>
       </div>
       <div>
